@@ -5,7 +5,9 @@ export default function Home() {
     <section className="page-shell">
       <div className="hero">
         <div className="hero-card fade-in">
-          <h1>Endowal turns financial literacy into real classroom momentum.</h1>
+          <h1 className="hero-title">
+            Endowal Edu turns financial literacy into real classroom momentum.
+          </h1>
           <p>
             Build budgets, assign savings challenges, and reward smart decisions.
             Teachers stay in control while students see their money habits grow.

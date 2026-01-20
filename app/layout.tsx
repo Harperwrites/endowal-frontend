@@ -16,7 +16,7 @@ const body = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Endowal | Financial Classroom Studio",
+  title: "Endowal Edu | Financial Classroom Studio",
   description: "Project-based finance app for teachers and students."
 };
 

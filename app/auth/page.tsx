@@ -116,9 +116,9 @@ const AuthPage = () => {
           </button>
         </div>
         <div className="hero-card fade-in fade-delay-1">
-          <h1>Teach money with real-world rhythm.</h1>
+          <h1 className="hero-title">Teach money with real-world rhythm.</h1>
           <p>
-            Endowal blends assignments, wallet simulations, and progress reports
+            Endowal Edu blends assignments, wallet simulations, and progress reports
             in one secure workspace. Keep every student on track without sharing
             sensitive bank data.
           </p>
