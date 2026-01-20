@@ -1,11 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const NavBar = () => {
   return (
     <nav className="navbar">
       <Link href="/" className="brand">
-        <strong>Endowal Edu</strong>
-        <span>School Finance Studio</span>
+        <Image
+          src="/Endowal Logo.png"
+          alt="Endowal Edu logo"
+          width={40}
+          height={40}
+          className="brand-logo"
+        />
+        <span className="brand-text">
+          <strong>Endowal Edu</strong>
+          <span>School Finance Studio</span>
+        </span>
       </Link>
       <div className="nav-links">
         <Link href="/dashboard">Dashboard</Link>

@@ -73,16 +73,28 @@ main {
 
 .brand {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-display), "Times New Roman", serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.brand span {
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-text span {
   font-size: 12px;
   color: rgba(248, 244, 236, 0.65);
+}
+
+.brand-logo {
+  border-radius: 999px;
+  box-shadow: var(--ring);
 }
 
 .nav-links {
