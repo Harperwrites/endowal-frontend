@@ -166,7 +166,7 @@ main {
 }
 
 .hero-title {
-  font-size: clamp(18px, 2.6vw, 28px);
+  font-size: clamp(15px, 2.2vw, 24px);
 }
 
 .hero-card p {
@@ -196,6 +196,14 @@ main {
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.bank-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+  margin-top: 24px;
 }
 
 .form-card {
@@ -259,6 +267,17 @@ main {
   border-radius: 16px;
   border: 1px solid rgba(247, 241, 232, 0.12);
   background: rgba(12, 25, 38, 0.7);
+}
+
+.list-item.active {
+  border-color: rgba(239, 227, 212, 0.6);
+  box-shadow: var(--ring);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
 }
 
 .tag {
