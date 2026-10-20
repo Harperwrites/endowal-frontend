@@ -1,131 +1,28 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { clearToken, fetchMe } from "@/lib/api";
-
-const DashboardPage = () => {
-  const [name, setName] = useState("Teacher");
-  const [role, setRole] = useState("teacher");
-  const [status, setStatus] = useState("Loading workspace...");
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const me = await fetchMe();
-        setName(me.name || "Teacher");
-        setRole(me.role || "teacher");
-        setStatus("Ready");
-      } catch (error) {
-        setStatus("Session expired. Please sign in again.");
-        clearToken();
-      }
-    };
-    load();
-  }, []);
-
-  return (
-    <section className="page-shell">
-      <div className="hero">
-        <div className="hero-card fade-in">
-          <h1>Welcome back, {name}.</h1>
-          <p>
-            Your {role} workspace is live. Assign new budget missions, review
-            student wallets, and track progress from one command deck.
-          </p>
-          <div className="tag">Status: {status}</div>
-        </div>
-        <div className="glass-card fade-in fade-delay-1">
-          <div className="section-title">Today&apos;s Pulse</div>
-          <div className="grid-three">
-            <div className="list-item">
-              <strong>5</strong>
-              <div>Active classrooms</div>
-            </div>
-            <div className="list-item">
-              <strong>18</strong>
-              <div>Assignments running</div>
-            </div>
-            <div className="list-item">
-              <strong>$12,480</strong>
-              <div>Simulated budget flow</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid-three">
-        <div className="glass-card fade-in fade-delay-2">
-          <div className="section-title">Classrooms</div>
-          <div className="card-list">
-            <div className="list-item">
-              <strong>Finance Lab A</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                24 students · Savings challenge
-              </p>
-            </div>
-            <div className="list-item">
-              <strong>Future Wealth 101</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                18 students · Budget sprint
-              </p>
-            </div>
-          </div>
-          <div style={{ marginTop: 16 }}>
-            <Link className="ghost-btn" href="/classrooms">
-              View classrooms
-            </Link>
-          </div>
-        </div>
-
-        <div className="glass-card fade-in fade-delay-2">
-          <div className="section-title">Assignments</div>
-          <div className="card-list">
-            <div className="list-item">
-              <strong>Needs vs. Wants</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                Due Friday · 78% submitted
-              </p>
-            </div>
-            <div className="list-item">
-              <strong>Startup Budget</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                Due next week · 14 teams
-              </p>
-            </div>
-          </div>
-          <div style={{ marginTop: 16 }}>
-            <Link className="ghost-btn" href="/assignments">
-              Review assignments
-            </Link>
-          </div>
-        </div>
-
-        <div className="glass-card fade-in fade-delay-2">
-          <div className="section-title">Student Wallets</div>
-          <div className="card-list">
-            <div className="list-item">
-              <strong>Top growth</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                9 students increased savings
-              </p>
-            </div>
-            <div className="list-item">
-              <strong>Alerts</strong>
-              <p style={{ color: "rgba(247,241,232,0.7)", margin: 0 }}>
-                3 budgets need review
-              </p>
-            </div>
-          </div>
-          <div style={{ marginTop: 16 }}>
-            <button className="ghost-btn" type="button">
-              View wallets
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default DashboardPage;
+import { useEffect, useState } from "react";
+import { apiFetch } from "@/lib/api";
+import { useSession } from "../components/Session";
+type Task={id:number;classroom_id:number;classroom_name:string;title:string;due_date:string|null;open:boolean;submitted:boolean;submission_count:number};
+type Summary={balance:string;account_count:number;classrooms:{id:number;name:string;student_count:number}[];student_count:number;assignment_count:number;todo_count:number;turned_in_count:number;review_count:number;grade_count:number;earned:string;possible:string;assignments:Task[];activity:{id:number;memo:string;assignment_title:string|null;type:string;amount:string}[]};
+const money=(n:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n));
+function MiniRing({value,max,label}:{value:number;max:number;label:string}){const progress=max?Math.min(1,value/max):0;return <svg viewBox="0 0 90 90" className="mini-ring" role="img" aria-label={`${label}: ${value} of ${max}`}><circle cx="45" cy="45" r="35" fill="none" stroke="currentColor" opacity=".15" strokeWidth="8"/><circle cx="45" cy="45" r="35" fill="none" stroke="currentColor" strokeWidth="8" pathLength="100" strokeDasharray={`${progress*100} 100`} strokeLinecap="round" transform="rotate(-90 45 45)"/><text x="45" y="50" textAnchor="middle" fill="currentColor" fontSize="19" fontWeight="600">{value}/{max}</text></svg>;}
+export default function Dashboard(){const {user,loading}=useSession();if(loading)return <section className="page-shell">Loading your day…</section>;if(!user)return <section className="page-shell"><h1>Welcome to Endowal Edu</h1><Link className="ghost-btn" href="/auth">Sign in</Link></section>;return <Overview key={user.id} user={user}/>;}
+function Overview({user}:{user:{id:number;name:string;role:string}}){
+ const student=user.role==="student";const [data,setData]=useState<Summary|null>(null);const [error,setError]=useState("");const [revision,setRevision]=useState(0);const [showBank,setShowBank]=useState(false);const [privateBalance,setPrivateBalance]=useState(true);const [settingsReady,setSettingsReady]=useState(false);const [lessons,setLessons]=useState(0);
+ useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem(`endowal-dashboard-${user.id}`)||"{}");setShowBank(saved.showBank!==false);setPrivateBalance(saved.privateBalance===true);}catch{setShowBank(true);setPrivateBalance(false);}setSettingsReady(true);},[user.id]);
+ useEffect(()=>{if(settingsReady)try{localStorage.setItem(`endowal-dashboard-${user.id}`,JSON.stringify({showBank,privateBalance}));}catch{}},[showBank,privateBalance,settingsReady,user.id]);
+ useEffect(()=>{const refresh=()=>{try{const saved=JSON.parse(localStorage.getItem(`endowal-credit-lessons-${user.id}`)||"[]");setLessons(Array.isArray(saved)?new Set(saved.filter((id:unknown)=>["borrowing","utilization","payments","interest","reports"].includes(String(id)))).size:0);}catch{setLessons(0);}};refresh();window.addEventListener("focus",refresh);window.addEventListener("storage",refresh);return()=>{window.removeEventListener("focus",refresh);window.removeEventListener("storage",refresh);};},[user.id]);
+ useEffect(()=>{let active=true;let busy=false;const refresh=async()=>{if(busy)return;busy=true;try{const summary=await apiFetch<Summary>("/dashboard/summary");if(active){setData(summary);setError("");}}catch{if(active)setError("We couldn’t refresh your snapshot. Try again in a moment.");}finally{busy=false;}};refresh();const timer=window.setInterval(refresh,15000);window.addEventListener("focus",refresh);return()=>{active=false;window.clearInterval(timer);window.removeEventListener("focus",refresh);};},[revision]);
+ const tasks=data?.assignments.filter(a=>student?!a.submitted&&a.open:a.open).slice(0,4)??[];
+ const percentage=data&&Number(data.possible)>0?`${(Number(data.earned)/Number(data.possible)*100).toFixed(1)}%`:"—";
+ return <section className="page-shell glimpse-shell"><header className="glimpse-header"><div><span className="glimpse-eyebrow">✦ A LITTLE LOOK AT YOUR DAY</span><h1>Hi, {user.name.split(" ")[0]} <span aria-hidden="true">☀</span></h1><p>{student?"A little progress, a little practice. You’ve got this.":"Small lessons. Big possibilities. Here’s your classroom pulse."}</p></div><div className="glimpse-tools"><button className="ghost-btn" onClick={()=>setRevision(r=>r+1)}>↻ Refresh</button><details className="dashboard-customize"><summary>Customize</summary><label><input type="checkbox" checked={showBank} disabled={!settingsReady} onChange={e=>setShowBank(e.target.checked)}/> Show bank preview</label><small>Saved for your account on this browser.</small></details></div></header>
+ {error&&<p role="alert" className="grade-notice">{error}{data?" Showing the last loaded snapshot.":""}</p>}
+ {!data?<p role="status">Gathering your little updates…</p>:<><div className="glimpse-pulse"><span>◌ {data.classrooms.length} {student?"classrooms":"active classrooms"}</span><span>✎ {student?`${data.todo_count} assignments to do`:`${data.student_count} students`}</span><span>✓ {student?`${data.turned_in_count} turned in`:`${data.review_count} submissions to review`}</span><small>Updates every 15 seconds</small></div><div className="glimpse-grid">
+ {settingsReady&&showBank&&<article className="glimpse-card bank-glimpse"><div className="glimpse-card-heading"><span className="glimpse-label">{student?"My little money corner":"Classroom money corner"}</span><button className="glimpse-text-button" onClick={()=>setPrivateBalance(h=>!h)} aria-pressed={privateBalance}>{privateBalance?"Show amounts":"Hide amounts"}</button></div><div className="glimpse-big" aria-label={privateBalance?"Balance hidden":undefined}>{privateBalance?"••••••":money(data.balance)}</div><p>{student?"Across your classroom accounts":"Total simulated student funds"} · {data.account_count} accounts</p><div className="glimpse-mini-list">{data.activity.length?data.activity.map(entry=><div key={entry.id}><span>{entry.type==="deposit"?"↙":"↗"} {entry.memo}{entry.assignment_title&&<small>✎ {entry.assignment_title}</small>}</span><strong>{privateBalance?"•••":`${entry.type==="deposit"?"+":"−"}${money(entry.amount)}`}</strong></div>):<span>Your first transaction will appear here.</span>}</div><Link href="/bank" className="glimpse-link">A closer look at Bank ↗</Link></article>}
+ <article className="glimpse-card assignment-glimpse"><div className="glimpse-card-heading"><span className="glimpse-label">{student?"On your little to-do list":"Classroom check-in"}</span><span aria-hidden="true">✎</span></div><div className="glimpse-number-row"><div><div className="glimpse-big">{student?data.todo_count:data.review_count}</div><p>{student?"assignments waiting for you":"turned-in assignments need review"}</p></div><MiniRing value={student?data.assignments.filter(a=>a.submitted).length:data.grade_count} max={student?data.assignment_count:Math.max(data.turned_in_count,data.grade_count)} label={student?"Assignments turned in":"Submissions graded"}/></div><div className="glimpse-mini-list">{tasks.length?tasks.map(task=><Link key={task.id} href={`/assignments?classroom=${task.classroom_id}`}><span><strong>{task.title}</strong><small>{task.classroom_name}</small></span><span className="glimpse-due">{task.due_date?`Due ${new Date(task.due_date+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"})}`:"No due date"}{!student&&<small>{task.submission_count} turned in</small>}</span></Link>):<span>{student?"You’re all caught up on open assignments. ✨":"No open assignments right now."}</span>}</div><Link className="glimpse-link" href="/assignments">{student?"See my assignments":"Review classroom work"} ↗</Link></article>
+ <article className="glimpse-card credit-glimpse"><div className="glimpse-card-heading"><span className="glimpse-label">A little credit confidence</span><span aria-hidden="true">✧</span></div><div className="glimpse-number-row"><div><span className="glimpse-score">No credit history</span><p>No credit score is connected yet.</p></div><MiniRing value={lessons} max={5} label="Credit lessons completed"/></div><div className="credit-milestone"><span>Credit lessons</span><strong>{lessons} of 5 complete</strong><progress value={lessons} max={5} aria-label="Credit lesson progress"/></div><p>{lessons===5?"Look at you go—all five lessons complete!":"Your next small step: practice borrowing, payments, or reading a report."}</p><Link href="/credit" className="glimpse-link">{student?"Grow my credit knowledge":"Explore credit resources"} ↗</Link></article>
+ <article className="glimpse-card grades-glimpse"><div className="glimpse-card-heading"><span className="glimpse-label">{student?"Your hard work, in a nutshell":"Your learning community"}</span><span aria-hidden="true">❀</span></div><div className="glimpse-big">{student?percentage:data.student_count}</div><p>{student?`${data.earned} / ${data.possible} points · ${data.grade_count} graded assignments`:`students across ${data.classrooms.length} classrooms`}</p>{student?<><div className="glimpse-note">Every bit of practice counts. This is your total-points grade for current classrooms; ungraded work isn’t counted as zero.</div><Link href="/grades" className="glimpse-link">Peek at grades & feedback ↗</Link></>:<><div className="glimpse-mini-list">{data.classrooms.slice(0,3).map(c=><Link key={c.id} href={`/classrooms?classroom=${c.id}`}><strong>{c.name}</strong><span>{c.student_count} students ↗</span></Link>)}</div><Link href="/grades" className="glimpse-link">{data.grade_count} grades saved · Open gradebook ↗</Link></>}</article>
+ </div>{settingsReady&&!showBank&&<p className="glimpse-hidden">Bank preview is tucked away. <button className="glimpse-text-button" onClick={()=>setShowBank(true)}>Show it again</button></p>}</>}
+ </section>;
+}

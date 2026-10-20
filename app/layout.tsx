@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cinzel, Sora } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "./components/Session";
+import MessageCenter from "./components/MessageCenter";
 import NavBar from "./components/NavBar";
 
 const display = Cinzel({
@@ -29,8 +31,8 @@ export default function RootLayout({
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
         <main>
-          <NavBar />
-          {children}
+          <SessionProvider><NavBar />
+          {children}<MessageCenter /></SessionProvider>
         </main>
       </body>
     </html>

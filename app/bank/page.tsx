@@ -5,6 +5,9 @@ import { useEffect, useMemo, useState } from "react";
 
 import { apiFetch, clearToken, fetchMe } from "@/lib/api";
 
+import StudentBank from "../components/StudentBank";
+import { useSession } from "../components/Session";
+
 type User = {
   id: number;
   name: string;
@@ -38,6 +41,7 @@ type LedgerEntry = {
   id: number;
   wallet_id: number;
   assignment_id?: number | null;
+  assignment_title?: string | null;
   amount: number;
   entry_type: string;
   source: string;
@@ -546,6 +550,7 @@ const BankPage = () => {
                       </div>
                       <p className="subtle-text">
                         {entry.memo || "No memo"} · {entry.source}
+                        {entry.assignment_title ? ` · Assignment: ${entry.assignment_title}` : " · Classroom funds"}
                       </p>
                     </div>
                   ))}
@@ -581,4 +586,9 @@ const BankPage = () => {
   );
 };
 
-export default BankPage;
+export default function Bank() {
+ const {user,loading} = useSession();
+ if(loading) return <section className="page-shell">Loading account…</section>;
+ if(!user) return <section className="page-shell"><h1>Your bank</h1><Link className="ghost-btn" href="/auth">Sign in to view your accounts</Link></section>;
+ return user.role === "student" ? <StudentBank key={user.id}/> : <BankPage key={user.id}/>;
+}

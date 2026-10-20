@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { login, register, setToken } from "@/lib/api";
 
+import { useSession } from "../components/Session";
+
 const AuthPage = () => {
+  const {user, loading: sessionLoading} = useSession();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,12 +17,17 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  useEffect(() => { try {setEmail(localStorage.getItem("endowal_last_email") || "");} catch {} }, []);
+
+  useEffect(() => { if (user) router.replace("/dashboard"); }, [user, router]);
+
   const handleSubmit = async () => {
     setStatus(null);
     setLoading(true);
     try {
       if (mode === "login") {
         const token = await login({ email, password });
+        localStorage.setItem("endowal_last_email", email.trim());
         setToken(token.access_token);
         router.push("/dashboard");
       } else {
@@ -38,10 +46,12 @@ const AuthPage = () => {
     }
   };
 
+  if (sessionLoading || user) return <section className="page-shell">Loading account…</section>;
+
   return (
     <section className="page-shell">
       <div className="hero">
-        <div className="form-card fade-in">
+        <form className="form-card fade-in" onSubmit={event => {event.preventDefault(); void handleSubmit();}}>
           <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
             <button
               className={mode === "login" ? "primary-btn" : "ghost-btn"}
@@ -87,6 +97,9 @@ const AuthPage = () => {
           <label htmlFor="email">Email address</label>
           <input
             id="email"
+            name="username"
+            autoComplete="username"
+            required
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -96,11 +109,16 @@ const AuthPage = () => {
           <label htmlFor="password">Password</label>
           <input
             id="password"
+            name="password"
+            autoComplete={mode === "login" ? "current-password" : "new-password"}
+            required
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="••••••••"
           />
+
+          {mode === "login" && <p className="remember-note">You’ll stay signed in on this browser for up to 30 days. Your email is remembered for next time.</p>}
 
           {status && (
             <div style={{ fontSize: 12, marginBottom: 12 }}>{status}</div>
@@ -108,13 +126,12 @@ const AuthPage = () => {
 
           <button
             className="primary-btn"
-            type="button"
-            onClick={handleSubmit}
+            type="submit"
             disabled={loading}
           >
             {loading ? "Working..." : mode === "login" ? "Enter" : "Create account"}
           </button>
-        </div>
+        </form>
         <div className="hero-card fade-in fade-delay-1">
           <h1 className="hero-title">Teach money with real-world rhythm.</h1>
           <p>
