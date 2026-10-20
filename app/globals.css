@@ -501,3 +501,85 @@ details summary { cursor:pointer; line-height:1.7; }
 .transaction-assignment-note small { display:block; }
 .transaction-preview { display:grid; gap:10px; padding:16px; border-radius:12px; background:rgba(145,211,197,.08); font-size:12px; line-height:1.7; margin:20px 0; }
 .activity-assignment { color:#a9d5c8; font-size:12px; margin:10px 0; }
+
+/* A sunny classroom, with real work behind every desk. */
+.classroom-scene-page { max-width:1500px; width:100%; margin:auto; }
+.school-room-tabs { display:flex; gap:12px; overflow-x:auto; padding:4px 2px 14px; }
+.school-room-tab { flex:0 0 auto; min-width:190px; text-align:left; border:1px solid rgba(239,227,212,.2); border-radius:18px; padding:16px 20px; background:rgba(239,227,212,.05); color:var(--pearl-100); font:inherit; cursor:pointer; }
+.school-room-tab h2 { font-size:15px; margin:10px 0 6px; }
+.school-room-tab p,.school-room-tab small { font-size:10px; margin:0; opacity:.75; }
+.school-room-tab .tag { font-size:9px; }
+.school-room-tab.selected { background:#e0ece4; color:#2d4c49; border-color:#b7d3c4; }
+.school-room-tab.selected .tag { color:#2d4c49; background:rgba(45,76,73,.1); }
+.school-room { color:#354b48; border-radius:28px; overflow:hidden; border:5px solid #e9dcc7; box-shadow:0 24px 60px rgba(0,0,0,.18); }
+.school-room-wall { position:relative; padding:48px 32px 28px; background:radial-gradient(ellipse at 0% 15%,#fff8dd 0,transparent 55%),#f5efdf; border-bottom:12px solid #d5b998; }
+.room-bunting { position:absolute; top:-12px; left:12%; right:12%; display:flex; justify-content:space-between; padding-top:14px; border-top:2px solid #a4b9a7; transform:rotate(-2deg); }
+.room-bunting span { width:22px; height:30px; background:#cc9f96; clip-path:polygon(0 0,100% 0,50% 100%); }
+.room-bunting span:nth-child(3n) { background:#b5c8b3; }
+.room-bunting span:nth-child(3n + 1) { background:#dfbf77; }
+.room-wall-layout { display:grid; grid-template-columns:140px minmax(0,1fr) 170px; gap:26px; align-items:center; }
+.room-window { height:155px; position:relative; overflow:hidden; border:8px solid #fefbf3; border-radius:54px 54px 6px 6px; background:linear-gradient(#cce9ed,#f7f9e9); box-shadow:0 5px 0 #d7ccb5,0 0 0 2px #d7ccb5; }
+.room-window::before,.room-window::after { content:""; position:absolute; background:#fefbf3; z-index:1; }
+.room-window::before { height:100%; width:6px; left:48%; }
+.room-window::after { width:100%; height:6px; top:50%; }
+.room-sun { position:absolute; top:16px; right:12px; width:34px; height:34px; background:#f2ce78; border-radius:50%; box-shadow:0 0 0 8px rgba(242,206,120,.17); }
+.room-cloud { position:absolute; left:4px; top:56px; width:62px; height:18px; border-radius:30px; background:#fffef7; }
+.window-caption { display:block; text-align:center; font-size:9px; margin-top:12px; color:#697e72; }
+.room-plant { margin:18px auto 0; width:46px; text-align:center; }
+.room-plant span { display:block; font-size:44px; line-height:1; color:#769b71; }
+.room-plant i { display:block; width:35px; height:27px; margin:auto; background:#cf9884; border-radius:3px 3px 13px 13px; }
+.room-chalkboard { position:relative; padding:26px 30px 30px; border:9px solid #c6a17d; border-radius:12px; background:radial-gradient(ellipse at 30% 10%,rgba(255,255,255,.06),transparent 60%),#355e55; color:#fcf8e8; box-shadow:0 5px 0 #aa886a, inset 0 0 22px rgba(0,0,0,.15); }
+.chalk-eyebrow { font-size:8px; letter-spacing:.2em; opacity:.75; }
+.room-chalkboard h2 { font-family:var(--font-display); font-size:clamp(19px,2.4vw,30px); margin:14px 0 10px; }
+.room-chalkboard > p { font-size:11px; margin:0; color:#d6e4cb; }
+.room-chalkboard h3 { font-size:11px; font-weight:400; color:#f4d794; margin:18px 0 10px; }
+.chalk-rule { width:60%; height:2px; border-radius:50%; margin:20px 0 0; background:rgba(239,239,213,.3); transform:rotate(-1deg); }
+.room-chalkboard ul { list-style:none; margin:0; padding:0; }
+.room-chalkboard li a { display:flex; gap:9px; align-items:baseline; padding:9px 0; font-size:11px; border-bottom:1px dashed rgba(247,241,232,.2); }
+.room-chalkboard li small { font-size:8px; margin-left:auto; text-align:right; color:#cfdfc8; }
+.chalk-check { color:#f4d794; }
+.chalk-all { display:inline-block; font-size:10px; margin-top:16px; text-decoration:underline; text-underline-offset:5px; }
+.chalk-tray { height:8px; position:absolute; bottom:-12px; left:15%; right:15%; border-radius:3px; background:#997457; }
+.chalk-tray span { position:absolute; width:22px; height:4px; bottom:8px; left:20px; background:#fef7de; border-radius:2px; transform:rotate(-3deg); }
+.chalk-tray span+span { left:52px; background:#f4cf9e; }
+.room-noticeboard { position:relative; padding:22px 16px; background:#e8d6b2; border:5px solid #d7bc91; border-radius:8px; transform:rotate(2deg); }
+.notice-pin { position:absolute; top:6px; left:48%; width:7px; height:7px; background:#8aaca0; border-radius:50%; box-shadow:0 2px 1px rgba(0,0,0,.18); }
+.room-sticker { color:#b0785f; font-size:28px; }
+.room-noticeboard h3 { font-size:13px; margin:8px 0; }
+.room-noticeboard p { font-size:10px; line-height:1.8; }
+.room-noticeboard > small { font-size:9px; }
+.room-sticky { background:#fff0bc; padding:14px 10px; margin:15px -4px; transform:rotate(-5deg); box-shadow:1px 3px 4px rgba(93,67,31,.1); text-align:center; }
+.room-sticky strong { display:block; font-size:24px; font-weight:600; }
+.room-sticky span { font-size:9px; }
+.school-room-floor { padding:26px 40px 22px; background:repeating-linear-gradient(0deg,transparent 0,transparent 69px,rgba(132,104,74,.07) 70px,transparent 72px),#e8d5b9; }
+.teacher-corner { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:500px; margin:0 auto; padding:14px 20px; border-radius:12px 12px 5px 5px; background:#c49d78; border-bottom:6px solid #ad835c; color:#302d26; box-shadow:0 8px 12px rgba(101,71,42,.09); }
+.teacher-nameplate { display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; }
+.teacher-nameplate > span:first-child { font-size:25px; }
+.teacher-nameplate small { display:block; font-size:9px; font-weight:400; margin-top:5px; }
+.room-help-button { background:#fff3d9; color:#4d5140; font:inherit; font-size:10px; border:0; border-radius:8px; padding:10px 12px; cursor:pointer; }
+.room-seat-label { text-align:center; margin:28px 0 14px; font-size:12px; }
+.room-seat-label small { display:block; margin-top:7px; font-size:9px; color:#627062; }
+.room-desks { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; max-width:920px; margin:0 auto; padding:10px 12px 20px; }
+.room-desk { display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 6px; border:2px solid transparent; border-radius:22px; text-align:center; transition:background .2s,transform .2s; }
+.room-desk:hover { background:rgba(255,251,239,.45); transform:translateY(-4px); }
+.room-desk:focus-visible,.school-room-tab:focus-visible,.room-help-button:focus-visible { outline:3px solid #355e55; outline-offset:3px; }
+.desk-name { font-size:12px; font-weight:600; line-height:1.6; }
+.room-desk > small { font-size:9px; line-height:1.7; color:#61685a; }
+.desk-art { display:block; position:relative; width:136px; height:105px; --desk-accent:#9db7a5; }
+.desk-peach { --desk-accent:#d6a28e; }
+.desk-lavender { --desk-accent:#b0a6c3; }
+.desk-yellow { --desk-accent:#d8bb79; }
+.desk-chair { position:absolute; top:0; left:43px; width:50px; height:46px; border-radius:14px 14px 6px 6px; background:var(--desk-accent); border-bottom:5px solid rgba(65,76,62,.16); }
+.desk-top { position:absolute; z-index:2; top:31px; left:3px; width:130px; height:48px; border-radius:12px; background:#f7e3bf; border:2px solid #c3a17a; box-shadow:0 6px 0 #c3a17a,0 12px 15px rgba(94,70,43,.1); transform:perspective(150px) rotateX(14deg); }
+.desk-legs { position:absolute; left:18px; right:18px; top:76px; height:25px; border-left:6px solid #9a8d7d; border-right:6px solid #9a8d7d; }
+.desk-notebook { position:absolute; top:7px; left:43px; width:32px; height:27px; border-radius:3px; background:var(--desk-accent); border-left:4px solid rgba(255,255,255,.4); transform:rotate(-9deg); }
+.desk-notebook::after { content:""; position:absolute; left:7px; top:8px; width:13px; border-top:2px solid rgba(255,255,255,.7); }
+.desk-pencil { position:absolute; left:89px; top:12px; width:4px; height:25px; background:#d59956; border-radius:2px; transform:rotate(20deg); border-top:4px solid #b78286; }
+.room-footer { text-align:center; color:#647160; font-size:10px; line-height:1.8; padding-top:8px; }
+.room-footer span { margin:0 10px; color:#9c886e; }
+.room-message-error { text-align:center; font-size:12px; }
+.classroom-work-heading,.classroom-assignment { scroll-margin-top:150px; }
+.classroom-scene-page .classroom-work-heading h2 { font-size:20px; }
+@media(max-width:1050px) { .room-wall-layout { grid-template-columns:100px minmax(0,1fr) 135px; gap:16px; } .school-room-wall { padding:42px 20px 25px; } .room-noticeboard { padding:18px 10px; } .room-chalkboard { padding:22px 20px; } .room-window { height:135px; } .school-room-floor { padding:24px 16px; } .room-desks { gap:8px; } }
+@media(max-width:760px) { .room-wall-layout { grid-template-columns:minmax(0,1fr); } .room-window-corner { display:none; } .room-noticeboard { transform:none; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px; } .room-noticeboard h3 { margin:0; } .room-noticeboard p { flex:1 1 140px; margin:0; } .room-noticeboard > small { margin:auto; } .room-sticky { margin:0; padding:8px 12px; transform:rotate(-2deg); } .room-sticky strong { font-size:18px; } .notice-pin { display:none; } .room-desks { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:0; } .school-room { border-width:3px; border-radius:20px; } .school-room-wall { padding:38px 14px 22px; } .room-chalkboard { border-width:7px; padding:20px 16px; } .teacher-corner { padding:12px; } .teacher-nameplate { gap:6px; } .teacher-nameplate > span:first-child { font-size:18px; } .room-chalkboard li a { flex-wrap:wrap; } .room-chalkboard li small { font-size:9px; } }
+@media(prefers-reduced-motion:reduce) { .room-desk { transition:none; } .room-desk:hover { transform:none; } }
