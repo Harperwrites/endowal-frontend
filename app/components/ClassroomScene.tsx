@@ -5,13 +5,14 @@ import { apiFetch } from "@/lib/api";
 
 type Task = { id:number; title:string; status:string; submissions:unknown[] };
 type Props = {
+  onOpenAssignment:(id:number)=>void;
   classroomId:number; name:string; teacherName:string; student:boolean; firstName:string;
   assignments:Task[]; students:{id:number;name:string}[];
 };
 function DeskArt({color="mint"}:{color?:string}) {
  return <span className={`desk-art desk-${color}`} aria-hidden="true"><span className="desk-chair"/><span className="desk-top"><span className="desk-notebook"/><span className="desk-pencil"/></span><span className="desk-legs"/></span>;
 }
-export default function ClassroomScene({classroomId,name,teacherName,student,firstName,assignments,students}:Props) {
+export default function ClassroomScene({classroomId,name,teacherName,student,firstName,assignments,students,onOpenAssignment}:Props) {
  const [messageError,setMessageError]=useState("");
  const open = assignments.filter(a=>a.status==="active"||a.status==="published");
  const done = assignments.filter(a=>a.submissions.length>0).length;
@@ -29,7 +30,7 @@ export default function ClassroomScene({classroomId,name,teacherName,student,fir
    <div className="room-bunting" aria-hidden="true">{Array.from({length:9},(_,i)=><span key={i}/>)}</div>
    <div className="room-wall-layout">
     <aside className="room-window-corner" aria-hidden="true"><div className="room-window"><i className="room-sun"/><i className="room-cloud"/></div><span className="window-caption">a bright day to grow</span><div className="room-plant"><span>✿</span><i/></div></aside>
-    <div className="room-chalkboard"><span className="chalk-eyebrow">ENDOWAL LEARNING CLUB</span><h2>{name}</h2><p>Little lessons. Big dreams. <span aria-hidden="true">✧</span></p><div className="chalk-rule"/><h3>On the board today</h3>{assignments.length?<ul>{assignments.slice(0,3).map(a=><li key={a.id}><a href={`#classroom-assignment-${a.id}`}><span className="chalk-check" aria-hidden="true">{student&&a.submissions.length?"✓":"○"}</span><span>{a.title}</span><small>{student?(a.submissions.length?"turned in":a.status==="closed"?"closed":"take a peek →"):`${a.submissions.length} turned in`}</small></a></li>)}</ul>:<p>Your next adventure is on its way.</p>}<a className="chalk-all" href="#classroom-work">View all {assignments.length} assignments ↘</a><div className="chalk-tray" aria-hidden="true"><span/><span/></div></div>
+    <div className="room-chalkboard"><span className="chalk-eyebrow">ENDOWAL LEARNING CLUB</span><h2>{name}</h2><p>Little lessons. Big dreams. <span aria-hidden="true">✧</span></p><div className="chalk-rule"/><h3>On the board today</h3>{assignments.length?<ul>{assignments.slice(0,3).map(a=><li key={a.id}><button onClick={()=>onOpenAssignment(a.id)}><span className="chalk-check" aria-hidden="true">{student&&a.submissions.length?"✓":"○"}</span><span>{a.title}</span><small>{student?(a.submissions.length?"turned in":a.status==="closed"?"closed":"take a peek →"):`${a.submissions.length} turned in`}</small></button></li>)}</ul>:<p>Your next adventure is on its way.</p>}<a className="chalk-all" href="#classroom-work">View all {assignments.length} assignments ↘</a><div className="chalk-tray" aria-hidden="true"><span/><span/></div></div>
     <aside className="room-noticeboard"><span className="notice-pin" aria-hidden="true"/><span className="room-sticker" aria-hidden="true">✷</span><h3>You belong here.</h3><p>{student?"Bring your ideas, ask questions, and try something new.":"A little encouragement goes a long way."}</p><div className="room-sticky"><strong>{student?`${done} / ${assignments.length}`:students.length}</strong><span>{student?"assignments turned in":"bright minds in this room"}</span></div><small>{open.length} open {open.length===1?"assignment":"assignments"}</small></aside>
    </div>
   </div>

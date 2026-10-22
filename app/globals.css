@@ -583,3 +583,168 @@ details summary { cursor:pointer; line-height:1.7; }
 @media(max-width:1050px) { .room-wall-layout { grid-template-columns:100px minmax(0,1fr) 135px; gap:16px; } .school-room-wall { padding:42px 20px 25px; } .room-noticeboard { padding:18px 10px; } .room-chalkboard { padding:22px 20px; } .room-window { height:135px; } .school-room-floor { padding:24px 16px; } .room-desks { gap:8px; } }
 @media(max-width:760px) { .room-wall-layout { grid-template-columns:minmax(0,1fr); } .room-window-corner { display:none; } .room-noticeboard { transform:none; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px; } .room-noticeboard h3 { margin:0; } .room-noticeboard p { flex:1 1 140px; margin:0; } .room-noticeboard > small { margin:auto; } .room-sticky { margin:0; padding:8px 12px; transform:rotate(-2deg); } .room-sticky strong { font-size:18px; } .notice-pin { display:none; } .room-desks { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:0; } .school-room { border-width:3px; border-radius:20px; } .school-room-wall { padding:38px 14px 22px; } .room-chalkboard { border-width:7px; padding:20px 16px; } .teacher-corner { padding:12px; } .teacher-nameplate { gap:6px; } .teacher-nameplate > span:first-child { font-size:18px; } .room-chalkboard li a { flex-wrap:wrap; } .room-chalkboard li small { font-size:9px; } }
 @media(prefers-reduced-motion:reduce) { .room-desk { transition:none; } .room-desk:hover { transform:none; } }
+
+.room-chalkboard li button { display:flex; align-items:baseline; gap:9px; width:100%; text-align:left; font:inherit; font-size:11px; color:inherit; background:transparent; border:0; border-bottom:1px dashed rgba(247,241,232,.2); padding:9px 0; cursor:pointer; }
+.room-chalkboard li button:hover { color:#f4d794; }
+.assignment-pinboard { scroll-margin-top:150px; color:#3c4c45; background:#d9c5a4; border:8px solid #b99775; border-radius:22px; padding:30px; background-image:radial-gradient(rgba(109,81,49,.1) .6px,transparent .6px); background-size:5px 5px; }
+.pinboard-header { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.pinboard-eyebrow { font-size:9px; letter-spacing:.18em; }
+.pinboard-header h2 { font-family:var(--font-display); font-size:23px; margin:12px 0; }
+.pinboard-header p { font-size:12px; line-height:1.7; }
+.pinboard-count { text-align:center; font-size:30px; background:#efe4ce; border-radius:50%; padding:18px; min-width:90px; }
+.pinboard-count small { display:block; font-size:9px; }
+.pinboard-filters { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:22px 0 30px; }
+.pinboard-filters button { font:inherit; font-size:11px; border:1px solid #a38a6b; background:transparent; border-radius:999px; color:#3c4c45; padding:9px 14px; cursor:pointer; }
+.pinboard-filters button[aria-pressed="true"] { background:#355e55; color:#fff8e9; border-color:#355e55; }
+.pinboard-filters a { margin-left:auto; font-size:12px; text-decoration:underline; }
+.assignment-papers { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:26px; }
+.assignment-paper { position:relative; display:flex; flex-direction:column; align-items:flex-start; text-align:left; font:inherit; color:#3c4c45; background:#fff4d9; border:0; padding:26px 22px 20px; min-height:230px; border-radius:3px 3px 16px 3px; box-shadow:2px 6px 10px rgba(92,65,35,.13); cursor:pointer; transition:transform .2s; }
+.paper-tone-1 { background:#e6ecdf; }.paper-tone-2 { background:#f0e3df; }
+.assignment-paper:hover { transform:translateY(-4px) rotate(-1deg); }
+.assignment-paper:focus-visible { outline:3px solid #355e55; outline-offset:5px; }
+.paper-tape { position:absolute; top:-10px; left:calc(50% - 24px); width:48px; height:20px; background:rgba(251,251,237,.65); transform:rotate(-5deg); border-left:1px dashed rgba(132,116,83,.25); border-right:1px dashed rgba(132,116,83,.25); }
+.paper-status { font-size:10px; padding:5px 9px; background:rgba(53,94,85,.08); border-radius:999px; }
+.assignment-paper h3 { font-size:17px; line-height:1.5; margin:16px 0 10px; }
+.assignment-paper p { font-size:11px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin:0 0 16px; }
+.assignment-paper > small { font-size:10px; margin-top:auto; }
+.paper-open { font-size:11px; font-weight:600; margin-top:18px; padding-top:12px; border-top:1px solid rgba(53,94,85,.17); width:100%; }
+.pinboard-empty { padding:24px 0; font-size:13px; }
+.assignment-notebook { padding:0; width:min(850px,calc(100vw - 32px)); max-height:calc(100dvh - 48px); overflow:auto; border:1px solid #c3bba6; border-radius:20px; color:var(--pearl-100); background:var(--ocean-900); box-shadow:0 28px 100px rgba(0,0,0,.5); }
+.assignment-notebook::backdrop { background:rgba(3,12,18,.75); backdrop-filter:blur(5px); }
+.notebook-header { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:24px 28px; background:#f2e8d3; color:#35534b; }
+.notebook-header span { font-size:9px; letter-spacing:.12em; }
+.notebook-header h2 { font-size:21px; line-height:1.5; margin:10px 0 0; }
+.notebook-header button { font:inherit; font-size:26px; border:1px solid #b4b9a6; border-radius:50%; width:40px; height:40px; flex-shrink:0; background:transparent; color:inherit; cursor:pointer; }
+.notebook-body { padding:20px; }
+.notebook-body .classroom-assignment { border:0; box-shadow:none; padding:12px; background:transparent; }
+.notebook-footer { font-size:10px; color:var(--pearl-300); line-height:1.8; padding:0 32px 24px; }
+@media(max-width:760px) { .assignment-pinboard { padding:22px 16px; border-width:5px; } .pinboard-count { display:none; } .pinboard-header h2 { font-size:20px; } .assignment-papers { grid-template-columns:1fr; gap:28px; } .assignment-paper { min-height:200px; } .notebook-header { padding:20px; } .notebook-body { padding:12px; } .room-chalkboard li button { flex-wrap:wrap; } }
+@media(prefers-reduced-motion:reduce) { .assignment-paper { transition:none; } .assignment-paper:hover { transform:none; } }
+
+/* Assignments get a planner of their own, distinct from the classroom pinboard. */
+.mission-planner-page { max-width:1450px; width:100%; margin:auto; }
+.mission-classroom-tabs { display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; }
+.mission-classroom-tab { color:var(--pearl-200); font:inherit; text-align:left; padding:14px 20px; min-width:190px; border:1px solid rgba(239,227,212,.2); background:rgba(239,227,212,.04); border-radius:16px; cursor:pointer; }
+.mission-classroom-tab.selected { background:#e4e0ed; color:#4c4b61; border-color:#e4e0ed; }
+.mission-classroom-tab.selected .tag { color:#4c4b61; background:rgba(76,75,97,.1); }
+.mission-classroom-tab h2 { font-size:14px; margin:10px 0 6px; }
+.mission-classroom-tab p,.mission-classroom-tab small { font-size:10px; margin:0; opacity:.75; }
+.mission-planner { overflow:hidden; border:1px solid #cabfae; border-radius:24px; background:#f5efdf; color:#354b48; box-shadow:0 20px 60px rgba(0,0,0,.2); }
+.mission-planner-cover { padding:30px; display:flex; align-items:center; justify-content:space-between; gap:24px; background:radial-gradient(circle at 80% 0%,#f1e8cf,transparent 55%),#e2eade; border-bottom:1px solid #bdcdbb; }
+.mission-eyebrow { font-size:9px; letter-spacing:.18em; color:#526d59; }
+.mission-planner-cover h2 { font-family:var(--font-display); font-size:clamp(22px,3vw,32px); margin:14px 0; }
+.mission-planner-cover p { font-size:12px; line-height:1.8; margin:0; }
+.mission-progress { flex:0 0 175px; padding:16px 20px; border-radius:16px; background:rgba(255,255,255,.4); transform:rotate(2deg); }
+.mission-progress > span { color:#8e9d76; float:right; font-size:28px; }
+.mission-progress strong { display:block; font-size:28px; font-weight:600; }
+.mission-progress strong small { font-size:15px; font-weight:400; }
+.mission-progress p { font-size:9px; margin:6px 0 10px; }
+.mission-progress progress { margin:0; height:6px; }
+.mission-planner-strip { display:flex; flex-wrap:wrap; gap:18px; padding:16px 28px; background:#ede5d5; font-size:11px; }
+.mission-planner-strip a { margin-left:auto; text-decoration:underline; text-underline-offset:4px; }
+.mission-planner-layout { display:grid; grid-template-columns:minmax(250px,1fr) minmax(0,2fr); min-height:480px; }
+.mission-sidebar { padding:24px 18px; border-right:1px solid #ded4c1; background:#f4eddf; }
+.mission-sidebar > label { display:block; font-size:11px; margin-bottom:12px; }
+.mission-sidebar > input { font:inherit; font-size:12px; width:100%; border:1px solid #c4c6b6; border-radius:10px; padding:12px; color:#354b48; background:#fffaf0; }
+.mission-filters { display:flex; flex-wrap:wrap; gap:5px; margin:14px 0 18px; }
+.mission-filters button { font:inherit; font-size:10px; border:1px solid #c4c6b6; border-radius:999px; padding:7px 11px; background:transparent; color:#43594d; cursor:pointer; }
+.mission-filters button[aria-pressed="true"] { color:#fffaf0; background:#496a5f; border-color:#496a5f; }
+.mission-list { display:grid; gap:9px; }
+.mission-list-item { display:flex; align-items:center; gap:10px; width:100%; font:inherit; text-align:left; border:1px solid transparent; border-radius:13px; padding:14px 10px; color:#43594d; background:rgba(255,255,255,.4); cursor:pointer; }
+.mission-list-item.active { background:#dddfe9; border-color:#afb4ca; color:#464c65; }
+.mission-number { width:29px; height:29px; display:grid; place-items:center; flex-shrink:0; background:rgba(255,255,255,.5); border-radius:9px; font-size:10px; }
+.mission-list-item strong { display:block; font-size:12px; line-height:1.7; }
+.mission-list-item small { display:block; font-size:9px; line-height:1.7; margin-top:6px; }
+.mission-list-item > span:last-child { margin-left:auto; font-size:12px; }
+.mission-workspace { padding:26px; background:linear-gradient(90deg,transparent 28px,rgba(194,144,129,.12) 29px,transparent 30px),#fffaf0; min-width:0; }
+.mission-workspace-heading { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; padding-bottom:18px; margin-bottom:14px; border-bottom:1px solid #ded4c1; }
+.mission-workspace-heading > span { font-size:9px; letter-spacing:.14em; }
+.mission-workspace-heading small { font-size:10px; color:#78836a; }
+.mission-workspace .classroom-assignment { background:transparent; border:0; box-shadow:none; color:#354b48; padding:12px 6px; }
+.mission-workspace .classroom-assignment h2 { font-size:22px; line-height:1.6; }
+.mission-workspace .classroom-assignment .chip { background:#e0e8dc; color:#3b5b4b; white-space:nowrap; }
+.mission-workspace .lesson-copy { color:#4b6055; font-size:13px; line-height:1.9; }
+.mission-workspace .subtle-text { color:#627163; font-size:11px; }
+.mission-workspace .turn-in-form label { color:#43594d; font-size:12px; }
+.mission-workspace .turn-in-form textarea { background:repeating-linear-gradient(transparent 0,transparent 29px,#e4e2d6 30px),#fffdf6; color:#354b48; border:1px solid #c5c6b4; line-height:30px; padding:12px 16px; }
+.mission-workspace .ghost-btn { color:#43594d; border-color:#aab4a1; font-size:11px; }
+.mission-workspace .primary-btn { background:#486a60; color:#fffaf0; box-shadow:none; font-size:11px; }
+.mission-workspace .list-item { background:#ede8d8; border-color:#d3d0be; }
+.mission-workspace .grade-notice { background:#e6ecdf; border-color:#bcc9b1; color:#3e5b49; }
+.mission-empty { font-size:12px; line-height:1.8; padding:20px 8px; }
+.mission-blank { text-align:center; max-width:360px; margin:70px auto; }
+.mission-blank > span { font-size:50px; color:#a0b391; }
+.mission-blank h3 { font-size:18px; }.mission-blank p { font-size:12px; line-height:1.8; }
+.mission-list-item:focus-visible,.mission-filters button:focus-visible,.mission-classroom-tab:focus-visible { outline:3px solid #567a6d; outline-offset:3px; }
+@media(max-width:850px) { .mission-planner-layout { grid-template-columns:1fr; } .mission-sidebar { border-right:0; border-bottom:1px solid #ded4c1; } .mission-list { grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); } .mission-workspace { padding:20px; } }
+@media(max-width:550px) { .mission-planner-cover { padding:24px 20px; flex-direction:column; align-items:stretch; } .mission-progress { flex:auto; transform:none; } .mission-planner-strip { padding:16px 20px; gap:12px; } .mission-planner-strip a { margin-left:0; } .mission-workspace .card-title { flex-wrap:wrap; } }
+.credit-account-opened { display:block; margin-top:8px; color:var(--pearl-400); font-size:10px; }
+.credit-report-number { display:block; font-size:34px; color:#a9d5c8; margin:18px 0; }
+
+/* A little neighborhood bank, made for classroom money. */
+.bank-boutique { max-width:1450px; width:100%; margin:auto; }
+.bank-boutique > .bank-heading .tag { color:#c9ddbd; background:rgba(166,196,151,.12); font-size:9px; letter-spacing:.15em; }
+.bank-boutique > .bank-heading h1 { font-size:clamp(26px,3.6vw,40px); }
+.bank-money-hero { display:grid; grid-template-columns:1fr 1fr; align-items:center; border:1px solid #c4d2b6; border-radius:28px; overflow:hidden; background:radial-gradient(ellipse at 95% 0%,#faf1ce,transparent 55%),#dee9d9; color:#34544a; }
+.bank-boutique .balance-banner { background:transparent; border:0; padding:34px 38px; border-radius:0; }
+.bank-money-eyebrow { display:block; font-size:9px; letter-spacing:.16em; margin-bottom:22px; color:#58765b; }
+.bank-boutique .balance-banner .section-title { color:#57705e; font-size:10px; margin-bottom:8px; }
+.bank-boutique .balance-amount { font-size:clamp(38px,5vw,62px); letter-spacing:-.04em; }
+.bank-boutique .balance-banner p { font-size:12px; line-height:1.8; }
+.bank-boutique .balance-banner .chip { background:rgba(62,95,70,.09); color:#4b654e; font-size:9px; }
+.bank-refresh-note { display:block; margin-top:14px; font-size:9px; color:#61735d; }
+.bank-art-corner { text-align:center; padding:12px 22px 24px; }
+.little-bank-art { display:block; width:100%; max-width:380px; margin:auto; }
+.bank-art-corner > span { display:block; margin-top:0; font-size:10px; color:#607459; letter-spacing:.04em; }
+.bank-boutique .bank-dashboard-grid { grid-template-columns:minmax(230px,1fr) minmax(0,2fr); margin-top:0; }
+.bank-boutique .glass-card { background:#f3ecdc; color:#354e46; border:1px solid #d2c8b0; box-shadow:0 14px 30px rgba(0,0,0,.1); }
+.bank-boutique .glass-card h2 { font-size:20px; line-height:1.5; }
+.bank-panel-eyebrow { font-size:9px; letter-spacing:.17em; color:#64816b; }
+.bank-boutique .account-card { position:relative; background:#dce7d4; color:#365644; border:1px solid #b3c4a2; border-radius:10px; padding:22px 18px; overflow:hidden; box-shadow:inset 0 0 0 5px #dce7d4,inset 0 0 0 6px #b3c4a2; }
+.bank-boutique .account-card:nth-child(3n + 2) { background:#e6e2ed; border-color:#c0b9cc; box-shadow:inset 0 0 0 5px #e6e2ed,inset 0 0 0 6px #c0b9cc; }
+.bank-boutique .account-card:nth-child(3n) { background:#f0dfce; border-color:#d6baa1; box-shadow:inset 0 0 0 5px #f0dfce,inset 0 0 0 6px #d6baa1; }
+.bank-boutique .account-card.active { outline:2px solid #64866e; outline-offset:3px; }
+.bank-boutique .account-card::after { content:"$"; position:absolute; right:12px; bottom:12px; color:rgba(62,95,70,.09); font-size:80px; font-weight:600; line-height:1; pointer-events:none; }
+.banknote-header { font-size:11px; line-height:1.8; }
+.banknote-header > span { font-size:16px; margin-right:5px; }
+.bank-boutique .account-card strong { font-size:30px; font-variant-numeric:tabular-nums; }
+.bank-boutique .account-card small { color:#5c7259; font-size:9px; }
+.bank-boutique .student-transaction { background:linear-gradient(90deg,transparent 25px,rgba(175,127,109,.1) 26px,transparent 27px),#fff8e9; border-top:7px solid #8ba78b; }
+.bank-boutique .student-transaction .tag { background:#e1e9d8; color:#4c6651; font-size:9px; letter-spacing:.1em; }
+.bank-boutique .chip { color:#5e7057; background:#e3e7d6; font-size:9px; }
+.bank-boutique .subtle-text { color:#657260; font-size:12px; line-height:1.8; }
+.bank-boutique .student-transaction label { color:#435e4d; font-size:11px; }
+.bank-boutique .student-transaction input,.bank-boutique .student-transaction select { color:#354e46; background:#fffdf5; border:1px solid #bdc5ad; border-radius:8px; }
+.bank-boutique .transaction-type button { color:#52644e; border-color:#bac5ac; }
+.bank-boutique .transaction-type button[aria-pressed="true"] { background:#496e5c; color:#fff9e9; border-color:#496e5c; }
+.bank-boutique .transaction-assignment-note { color:#62725e; }
+.bank-boutique .transaction-preview { background:#eaf0df; border:1px dashed #a7b695; border-radius:5px; color:#4b634f; }
+.bank-boutique .primary-btn { color:#fffaeb; background:#496e5c; box-shadow:none; }
+.bank-boutique .glass-card .ghost-btn { color:#49654f; border-color:#adbaa0; }
+.bank-boutique .grade-notice { background:#e3ead9; color:#38573f; border-color:#b6c4a5; }
+.bank-boutique .money-in { color:#387155; }.bank-boutique .money-out { color:#99604e; }
+.bank-boutique .bank-receipt { position:relative; background:#fff8e9; border-bottom:8px dotted #d8c8a9; }
+.bank-receipt > .card-title { padding-bottom:14px; border-bottom:1px dashed #bfc4ad; }
+.bank-boutique .bank-receipt .list-item { background:transparent; color:#354e46; border:0; border-bottom:1px dashed #c5c8b2; border-radius:0; padding:18px 0; }
+.bank-boutique .bank-receipt .activity-assignment { color:#637b60; font-size:11px; }
+.bank-receipt .list-item small { color:#7a826d; font-size:9px; }
+.teacher-bank-boutique .hero-card { background:#e1e9d8; color:#355344; border-color:#c3ceb2; }
+.teacher-bank-boutique .hero-card p { color:#62725e; }.teacher-bank-boutique .hero-card .tag { color:#49684e; background:#c9d9be; }
+.teacher-bank-boutique .hero-card .little-bank-art { max-width:220px; margin:6px auto; }
+.teacher-bank-boutique .glass-card .list-item { background:#e4e8d9; color:#3d5b49; border-color:#c2c9b2; }
+.teacher-bank-boutique .section-title { color:#6a7d61; }
+@media(max-width:760px) { .bank-money-hero { grid-template-columns:1fr; } .bank-boutique .balance-banner { padding:28px; } .bank-art-corner { padding:0 24px 20px; } .bank-art-corner .little-bank-art { max-width:260px; } .bank-boutique .bank-dashboard-grid { grid-template-columns:1fr; } .bank-boutique .student-transaction > .card-title { flex-wrap:wrap; } }
+
+.check-writing-corner { background:#e6e3ed; color:#43534c; border:1px solid #c3becd; border-radius:24px; padding:28px; }
+.check-corner-header { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:24px; }
+.check-corner-header h2 { font-family:var(--font-display); font-size:25px; margin:12px 0; }.check-corner-header p { font-size:12px; line-height:1.8; max-width:650px; margin:0; }
+.bank-boutique .check-writing-corner .ghost-btn { color:#4c5e51; border-color:#a7b2a1; font-size:11px; }
+.check-lesson-layout { display:grid; grid-template-columns:180px minmax(0,1fr); gap:24px; }
+.check-steps h3 { font-size:12px; }.check-steps button { display:flex; align-items:center; gap:10px; font:inherit; font-size:11px; width:100%; padding:10px; margin:4px 0; border:1px solid transparent; border-radius:10px; background:transparent; color:#526052; text-align:left; cursor:pointer; }
+.check-steps button span { width:22px; height:22px; display:grid; place-items:center; border-radius:50%; background:#f7f0df; font-size:10px; }.check-steps button.active { background:#cfdcc9; border-color:#acbca3; }.check-steps p { font-size:11px; line-height:1.9; padding:10px; }
+.writable-check { padding:26px; border:2px solid #b5c2ab; border-radius:8px; background:repeating-linear-gradient(135deg,transparent 0,transparent 9px,rgba(144,163,125,.025) 10px,transparent 11px),#fbf7e7; color:#365345; box-shadow:0 9px 18px rgba(65,75,49,.09); }
+.check-topline { display:flex; justify-content:space-between; gap:20px; }.check-topline strong { display:block; font-size:12px; letter-spacing:.12em; }.check-topline small { display:block; font-size:9px; margin-top:8px; }.check-number { text-align:right; font-size:12px; white-space:nowrap; }.check-number small { font-size:8px; letter-spacing:.1em; color:#977b60; }
+.writable-check label { display:block; font-size:10px; color:#61715c; }.writable-check input { display:block; width:100%; border:0; border-bottom:1px solid #92a184; padding:10px 4px 6px; border-radius:0; color:#375341; background:transparent; font:inherit; font-size:14px; }.writable-check input::placeholder { color:#929c82; font-size:11px; }.writable-check input:focus-visible { outline:2px solid #6d9679; outline-offset:2px; background:#fffdf5; }
+.check-date-row { display:flex; justify-content:flex-end; margin:16px 0; }.check-date-row label { width:180px; }.check-pay-row { display:grid; grid-template-columns:minmax(0,1fr) 135px; gap:22px; align-items:end; }.check-dollar-box input { border:1px solid #92a184; border-radius:3px; padding:8px; }.check-words-label { margin-top:22px; }.check-words-label input { font-size:12px; }.check-hint-row { display:flex; gap:12px; align-items:center; justify-content:space-between; margin:10px 0 24px; }.check-hint-row button { font:inherit; font-size:10px; border:0; padding:5px 0; text-decoration:underline; background:transparent; color:#526e56; cursor:pointer; }.check-hint-row > span { font-size:8px; letter-spacing:.12em; color:#9d8b70; }.check-bottom-row { display:grid; grid-template-columns:1fr 1fr; gap:28px; }.check-bottom-row label:last-child input { font-family:Georgia,serif; font-style:italic; font-size:18px; }.check-bottom-print { display:flex; justify-content:space-between; font-family:monospace; font-size:9px; margin-top:24px; color:#718367; letter-spacing:.15em; }.check-feedback { padding:16px; border-radius:12px; background:#f6eddb; font-size:12px; line-height:1.8; }.check-feedback.complete { background:#d6e4ce; }.check-practice-note { font-size:10px; line-height:1.8; color:#69705e; margin-top:18px; }
+@media(max-width:900px) { .check-lesson-layout { grid-template-columns:1fr; }.check-steps { display:flex; flex-wrap:wrap; gap:6px; }.check-steps h3 { width:100%; }.check-steps button { width:auto; }.check-steps p { width:100%; margin:0; } }
+@media(max-width:600px) { .check-writing-corner { padding:20px 14px; }.check-corner-header { flex-wrap:wrap; }.writable-check { padding:18px 14px; }.check-topline strong { font-size:10px; }.check-pay-row { grid-template-columns:1fr; gap:18px; }.check-dollar-box { max-width:150px; }.check-bottom-row { grid-template-columns:1fr; gap:20px; }.check-hint-row { flex-wrap:wrap; }.check-bottom-print { font-size:7px; letter-spacing:0; } }

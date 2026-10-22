@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import CheckWriting from "../components/CheckWriting";
+import BankArtwork from "../components/BankArtwork";
 import { useEffect, useMemo, useState } from "react";
 
 import { apiFetch, clearToken, fetchMe } from "@/lib/api";
@@ -325,10 +327,10 @@ const BankPage = () => {
   };
 
   return (
-    <section className="page-shell">
+    <section className="page-shell bank-boutique teacher-bank-boutique">
       <div className="hero">
         <div className="hero-card fade-in">
-          <h1>Endowal Bank Desk</h1>
+          <span className="bank-panel-eyebrow">THE LITTLE ENDOWAL BANK</span><h1>Your classroom teller desk.</h1><BankArtwork/>
           <p>
             Issue classroom wallets, track student deposits, and keep clean
             statements ready for teacher review.
@@ -581,6 +583,7 @@ const BankPage = () => {
         </div>
       </div>
 
+      <CheckWriting/>
       {actionNotice ? <div className="tag">{actionNotice}</div> : null}
     </section>
   );
