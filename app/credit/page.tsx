@@ -1,4 +1,5 @@
 "use client";
+import { client,clientStorageKey } from "@/lib/client-config";
 
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
@@ -42,10 +43,10 @@ export default function Credit() {
  useEffect(()=>{
    setStorageReady(false); setCompleted([]); setPractice(false); setAnswer(null);
    if(!user)return;
-   try { const saved=JSON.parse(localStorage.getItem(`endowal-credit-lessons-${user.id}`)||"[]"); if(Array.isArray(saved))setCompleted(saved.filter((id:unknown)=>typeof id==="string"&&lessons.some(l=>l.id===id))); } catch {}
+   try { const saved=JSON.parse(localStorage.getItem(clientStorageKey(`credit-lessons-${user.id}`))||"[]"); if(Array.isArray(saved))setCompleted(saved.filter((id:unknown)=>typeof id==="string"&&lessons.some(l=>l.id===id))); } catch {}
    setStorageReady(true);
  },[user]);
- useEffect(()=>{if(user&&storageReady)try{localStorage.setItem(`endowal-credit-lessons-${user.id}`,JSON.stringify(completed));}catch{}},[completed,user,storageReady]);
+ useEffect(()=>{if(user&&storageReady)try{localStorage.setItem(clientStorageKey(`credit-lessons-${user.id}`),JSON.stringify(completed));}catch{}},[completed,user,storageReady]);
  if(loading)return <section className="page-shell">Loading account…</section>;
  if(!user)return <section className="page-shell"><h1>Credit</h1><Link href="/auth">Sign in to explore credit</Link></section>;
  const current=lessons[lesson];

@@ -1,0 +1,12 @@
+{
+  "voice": "macOS Samantha (synthetic)",
+  "words_per_minute_setting": 132,
+  "duration_seconds": 60,
+  "speech_duration_seconds": 52.058,
+  "lead_in_seconds": 0.4,
+  "closing_silence_seconds": 7.542,
+  "sample_rate": 44100,
+  "channels": 1,
+  "speech_truncated": false,
+  "music_included": false
+}

@@ -1,4 +1,5 @@
 "use client";
+import { client } from "@/lib/client-config";
 
 import Link from "next/link";
 import CheckWriting from "../components/CheckWriting";
@@ -330,7 +331,7 @@ const BankPage = () => {
     <section className="page-shell bank-boutique teacher-bank-boutique">
       <div className="hero">
         <div className="hero-card fade-in">
-          <span className="bank-panel-eyebrow">THE LITTLE ENDOWAL BANK</span><h1>Your classroom teller desk.</h1><BankArtwork/>
+          <span className="bank-panel-eyebrow">{client.bankName.toUpperCase()}</span><h1>Your classroom teller desk.</h1><BankArtwork/>
           <p>
             Issue classroom wallets, track student deposits, and keep clean
             statements ready for teacher review.
@@ -583,7 +584,7 @@ const BankPage = () => {
         </div>
       </div>
 
-      <CheckWriting/>
+      {client.features.checkWriting&&<CheckWriting/>}
       {actionNotice ? <div className="tag">{actionNotice}</div> : null}
     </section>
   );

@@ -11,3 +11,7 @@ yarn-error.log*
 .env.*
 !.env.example
 *.tsbuildinfo
+
+# Intermediate speech renders; keep the final narration exports.
+promo/investor-donor/narration-source.*
+promo/investor-donor/narration-draft.aiff

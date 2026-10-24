@@ -1,4 +1,5 @@
 "use client";
+import { clientStorageKey, client } from "@/lib/client-config";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => { try {setEmail(localStorage.getItem("endowal_last_email") || "");} catch {} }, []);
+  useEffect(() => { try {setEmail(localStorage.getItem(clientStorageKey("last_email")) || "");} catch {} }, []);
 
   useEffect(() => { if (user) router.replace("/dashboard"); }, [user, router]);
 
@@ -27,7 +28,7 @@ const AuthPage = () => {
     try {
       if (mode === "login") {
         const token = await login({ email, password });
-        localStorage.setItem("endowal_last_email", email.trim());
+        localStorage.setItem(clientStorageKey("last_email"), email.trim());
         setToken(token.access_token);
         router.push("/dashboard");
       } else {
@@ -61,14 +62,14 @@ const AuthPage = () => {
             >
               Sign In
             </button>
-            <button
+            {client.allowSelfRegistration&&<button
               className={mode === "register" ? "primary-btn" : "ghost-btn"}
               type="button"
               onClick={() => setMode("register")}
               style={{ flex: 1 }}
             >
               Register
-            </button>
+            </button>}
           </div>
 
           {mode === "register" && (
@@ -135,7 +136,7 @@ const AuthPage = () => {
         <div className="hero-card fade-in fade-delay-1">
           <h1 className="hero-title">Teach money with real-world rhythm.</h1>
           <p>
-            Endowal Edu blends assignments, wallet simulations, and progress reports
+            {client.name} blends assignments, wallet simulations, and progress reports
             in one secure workspace. Keep every student on track without sharing
             sensitive bank data.
           </p>

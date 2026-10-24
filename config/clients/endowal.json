@@ -1,0 +1,34 @@
+{
+  "id": "endowal",
+  "name": "Endowal Edu",
+  "tagline": "Little lessons. Lasting possibilities.",
+  "description": "Project-based financial learning for teachers and students.",
+  "logo": "/Endowal Logo.png",
+  "logoAlt": "Endowal Edu logo",
+  "bankName": "Endowal Learning Bank",
+  "labels": {
+    "student": "student",
+    "teacher": "teacher",
+    "classrooms": "Classrooms",
+    "assignments": "Assignments",
+    "bank": "Bank",
+    "credit": "Credit",
+    "grades": "Grades",
+    "dashboard": "Dashboard"
+  },
+  "features": {
+    "credit": true,
+    "checkWriting": true,
+    "messaging": true,
+    "publicDemo": true,
+    "interest": true
+  },
+  "theme": {
+    "primary": "#355e4e",
+    "accent": "#a58b4d",
+    "paper": "#faf6eb"
+  },
+  "supportEmail": null,
+  "allowSelfRegistration": true,
+  "introVideo": "/videos/endowal-intro.mp4"
+}

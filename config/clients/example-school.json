@@ -1,0 +1,34 @@
+{
+  "id": "example-school",
+  "name": "Example School Money Lab",
+  "tagline": "Practice today. Build tomorrow.",
+  "description": "Project-based financial learning for teachers and students.",
+  "logo": "/clients/example-school/logo.svg",
+  "logoAlt": "Example School demonstration logo",
+  "bankName": "Example School Practice Bank",
+  "labels": {
+    "student": "learner",
+    "teacher": "mentor",
+    "classrooms": "Learning groups",
+    "assignments": "Missions",
+    "bank": "Bank",
+    "credit": "Credit",
+    "grades": "Grades",
+    "dashboard": "Dashboard"
+  },
+  "features": {
+    "credit": true,
+    "checkWriting": true,
+    "messaging": true,
+    "publicDemo": true,
+    "interest": false
+  },
+  "theme": {
+    "primary": "#3b526f",
+    "accent": "#aa7646",
+    "paper": "#f7f3e9"
+  },
+  "supportEmail": null,
+  "allowSelfRegistration": false,
+  "introVideo": null
+}

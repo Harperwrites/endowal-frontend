@@ -1,4 +1,5 @@
 "use client";
+import { clientStorageKey } from "@/lib/client-config";
 import { createContext, useContext, useEffect, useState, useCallback, useRef } from "react";
 import { fetchMe, apiFetch } from "@/lib/api";
 type User = Awaited<ReturnType<typeof fetchMe>>;
@@ -13,11 +14,11 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
       const current = await fetchMe();
       if(version !== sequence.current) return;
       setUser(current);
-      localStorage.setItem("endowal_last_email", current.email);
+      localStorage.setItem(clientStorageKey("last_email"), current.email);
       // Upgrade already-signed-in browsers without asking for credentials again.
       void apiFetch("/auth/remember", {method:"POST"}).catch(() => {});
     } catch {
-      if(version === sequence.current && !localStorage.getItem("endowal_token")) setUser(null);
+      if(version === sequence.current && !localStorage.getItem(clientStorageKey("token"))) setUser(null);
     } finally { if(version === sequence.current) setLoading(false); }
   }, []);
   useEffect(() => { refresh(); window.addEventListener("endowal-session",refresh); window.addEventListener("storage",refresh); return () => { window.removeEventListener("endowal-session",refresh); window.removeEventListener("storage",refresh); }; },[refresh]);

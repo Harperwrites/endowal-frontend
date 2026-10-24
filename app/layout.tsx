@@ -1,3 +1,5 @@
+import { client } from "@/lib/client-config";
+import ClientBoundary from "./components/ClientBoundary";
 import type { Metadata } from "next";
 import { Cinzel, Sora } from "next/font/google";
 import "./globals.css";
@@ -18,8 +20,8 @@ const body = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Endowal Edu | Financial Classroom Studio",
-  description: "Project-based finance app for teachers and students."
+  title: `${client.name} | Financial Learning`,
+  description: client.description
 };
 
 export default function RootLayout({
@@ -29,10 +31,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body>
+      <body data-client={client.id} style={{"--client-primary":client.theme.primary,"--client-accent":client.theme.accent,"--client-paper":client.theme.paper} as React.CSSProperties}>
         <main>
-          <SessionProvider><NavBar />
-          {children}<MessageCenter /></SessionProvider>
+          <ClientBoundary><SessionProvider><NavBar />
+          {children}{client.features.messaging&&<MessageCenter />}</SessionProvider></ClientBoundary>
         </main>
       </body>
     </html>
