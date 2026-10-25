@@ -6,19 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "deploy:cloudflare": "opennextjs-cloudflare deploy",
+    "preview:cloudflare": "opennextjs-cloudflare preview"
   },
   "dependencies": {
-    "next": "15.5.2",
+    "@fontsource-variable/cinzel": "^5.3.0",
+    "@fontsource-variable/sora": "^5.3.0",
+    "@opennextjs/cloudflare": "^1.20.13",
+    "next": "^15.5.28",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "wrangler": "^4.152.0"
   },
   "devDependencies": {
     "@types/node": "20.11.30",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
     "eslint": "8.57.0",
-    "eslint-config-next": "15.5.2",
+    "eslint-config-next": "^15.5.28",
     "typescript": "5.4.5"
   }
 }
