@@ -868,3 +868,7 @@ body[data-client]:not([data-client="endowal"]) .primary-btn { background:var(--c
 .landing-video-sound-controls button { padding:9px 15px; border:1px solid #355e4e; border-radius:999px; background:#355e4e; color:#fff9eb; cursor:pointer; font:inherit; }
 .landing-video-sound-controls label { display:flex; align-items:center; gap:9px; }.landing-video-sound-controls input { width:100px; accent-color:#355e4e; }.landing-video-sound-controls > span { font-size:11px; }.landing-video-sound-controls > a { margin-left:auto; font-size:11px; color:#355e4e; }
 @media(max-width:550px) { .landing-video-sound-controls { padding:12px 16px; gap:10px; }.landing-video-sound-controls > a { margin-left:0; } }
+
+/* Platform attribution stays readable without a surrounding box. */
+.brand-text .platform-credit,.landing-footer .platform-credit{display:block;font-family:var(--font-body),sans-serif;font-size:10px;line-height:1.5;font-weight:500;letter-spacing:0;text-transform:none;color:#355e4e;max-width:260px;white-space:normal;}
+@media(max-width:520px){.brand-text .platform-credit{font-size:8px;max-width:170px;}}

@@ -10,7 +10,12 @@ export function resolveClient(id:string):ClientConfig {
  if(config.introVideo&&(!config.introVideo.startsWith("/")||config.introVideo.startsWith("//")))throw new Error("Use a local /public intro video path");
  return config;
 }
-export const client=resolveClient(process.env.NEXT_PUBLIC_CLIENT_ID||"endowal");
+const profile=resolveClient(process.env.NEXT_PUBLIC_CLIENT_ID||"endowal");
+// Hosted deployments use school-managed accounts unless explicitly configured otherwise.
+export const client:ClientConfig={...profile,allowSelfRegistration:
+ process.env.NEXT_PUBLIC_ALLOW_SELF_REGISTRATION === "true" ? true :
+ process.env.NEXT_PUBLIC_ALLOW_SELF_REGISTRATION === "false" ? false :
+ process.env.NODE_ENV === "production" ? false : profile.allowSelfRegistration};
 export const roleLabel=(role:string)=>role==="student"?client.labels.student:role==="teacher"?client.labels.teacher:role;
 
 export const clientStorageKey=(name:string)=>client.id==="endowal"?((name.startsWith("credit-lessons-")||name.startsWith("dashboard-"))?`endowal-${name}`:`endowal_${name}`):`endowal_${client.id}_${name}`;

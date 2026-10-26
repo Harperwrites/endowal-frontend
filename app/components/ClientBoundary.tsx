@@ -10,6 +10,6 @@ export default function ClientBoundary({children}:{children:React.ReactNode}) {
  const disabled=(path.startsWith("/credit")&&!client.features.credit);
  if(disabled)return <section className="page-shell"><h1>This feature isn’t enabled for {client.name}.</h1><Link href="/dashboard">Back to dashboard</Link></section>;
  // Public presentation remains usable without an API; account pages fail closed.
- if(path!=="/"&&status!=="ready")return <section className="page-shell" role="status"><h1>{status==="loading"?"Connecting to your learning space…":status==="mismatch"?"Client configuration mismatch":"Unable to connect to your learning space"}</h1>{status!=="loading"&&<><p>{status==="mismatch"?"The frontend and API client IDs must match. Check the deployment configuration.":"Please try again when the server is available."}</p><button className="ghost-btn" onClick={()=>setRetry(n=>n+1)}>Retry connection</button></>}</section>;
+ if(path!=="/"&&status!=="ready")return <section className="page-shell" role="status"><h1>{status==="loading"?"Connecting to your learning space…":status==="mismatch"?"Client configuration mismatch":"Unable to connect to your learning space"}</h1>{status!=="loading"&&<><p>{status==="mismatch"?"The website and API must use matching client IDs, registration settings, and enabled features. Check the deployment configuration.":"Please try again when the server is available."}</p><button className="ghost-btn" onClick={()=>setRetry(n=>n+1)}>Retry connection</button></>}</section>;
  return <>{children}</>;
 }
