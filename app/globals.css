@@ -872,3 +872,35 @@ body[data-client]:not([data-client="endowal"]) .primary-btn { background:var(--c
 /* Platform attribution stays readable without a surrounding box. */
 .brand-text .platform-credit,.landing-footer .platform-credit{display:block;font-family:var(--font-body),sans-serif;font-size:10px;line-height:1.5;font-weight:500;letter-spacing:0;text-transform:none;color:#355e4e;max-width:260px;white-space:normal;}
 @media(max-width:520px){.brand-text .platform-credit{font-size:8px;max-width:170px;}}
+
+/* Endowal's workspace echoes the landing page: forest, sage, cream and gold.
+   Navy remains in bank artwork and selected financial details. */
+body[data-client="endowal"] {
+  --ocean-950:#12251e;
+  --ocean-900:#19362b;
+  --ocean-850:#204334;
+  --ocean-800:#2b5140;
+  --ocean-700:#355e4e;
+  --ocean-600:#47745c;
+  --navy-glow:#274b69;
+  --sea-glow:#6f9476;
+  --pearl-100:#faf6eb;
+  --pearl-200:#ece8d7;
+  --pearl-300:#d8d5b9;
+  --pearl-400:#c9bd91;
+  --ring:0 0 0 2px rgba(181,202,157,.35),0 0 24px rgba(111,148,118,.25);
+  --card-shadow:0 24px 60px rgba(12,32,23,.3);
+  --soft-shadow:0 12px 28px rgba(12,32,23,.2);
+  background-color:#12251e;
+  background-image:radial-gradient(ellipse at 15% 0%,rgba(132,160,116,.22),transparent 55%),radial-gradient(ellipse at 90% 30%,rgba(165,139,77,.1),transparent 60%),linear-gradient(180deg,#203d30,#142b23 65%,#12251e);
+}
+body[data-client="endowal"] .navbar:not(.landing-navbar) { background:rgba(21,46,35,.96);border-bottom-color:rgba(207,209,169,.2); }
+body[data-client="endowal"] .navbar:not(.landing-navbar) .platform-credit { color:#d4d9bd; }
+body[data-client="endowal"] .hero-card { background:linear-gradient(145deg,#355e4e,#19362b);border-color:rgba(207,209,169,.2); }
+body[data-client="endowal"] .glass-card { background:rgba(25,54,43,.86);border-color:rgba(207,209,169,.16); }
+body[data-client="endowal"] .primary-btn { background:linear-gradient(120deg,#f2ecd8,#d9c895);color:#213e30; }
+body[data-client="endowal"] .nav-links a[aria-current="page"] { background:#dce5ce;color:#234533;border-color:#b5c5a3; }
+body[data-client="endowal"] .balance-banner { background:linear-gradient(120deg,#355e4e,#193b35 70%,#122d40); }
+body[data-client="endowal"] .credit-glimpse { background:#e1e7d7; }
+body[data-client="endowal"] .mission-classroom-tab.selected { background:#dce5ce;color:#35513b;border-color:#b5c5a3; }
+body[data-client="endowal"] .mission-classroom-tab.selected .tag { color:#35513b;background:rgba(53,81,59,.1); }
